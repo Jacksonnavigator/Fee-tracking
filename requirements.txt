@@ -1,3 +1,3 @@
 streamlit
 sqlalchemy
-psycopg2-binary  # Use this if you're using PostgreSQL, otherwise use mysqlclient for MySQL
+openpyxl  # For reading Excel files
