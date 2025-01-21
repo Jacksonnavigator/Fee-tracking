@@ -12,16 +12,13 @@ with st.form("student_fee"):
     submitted = st.form_submit_button("Update Fee")
 
     if submitted:
-        session = Session()
-        if update_fee_status(session, student_id, amount_paid):
-            st.success(f"Fee updated successfully for student ID: {student_id}")
-            student = get_student(session, student_id)
-            if student:
-                # Note: This is just a log message. In production, you'd use real notifications.
-                st.write(f"Notification sent: Payment of ${amount_paid} received. Remaining due: ${student.fee_due}")
-                # send_notification(student.email, f"Payment of ${amount_paid} received. Remaining due: ${student.fee_due}")
-        else:
-            st.error("Failed to update fee. Check student ID.")
-        session.close()
-
-# Additional features like adding new students, viewing all students etc. can be added here.
+        with Session() as session:
+            if update_fee_status(session, student_id, amount_paid):
+                st.success(f"Fee updated successfully for student ID: {student_id}")
+                student = get_student(session, student_id)
+                if student:
+                    st.write(f"Notification would be sent: Payment of ${amount_paid} received. Remaining due: ${student.fee_due}")
+                    # Uncomment the following line when you have email setup configured
+                    # send_notification(student.email, f"Payment of ${amount_paid} received. Remaining due: ${student.fee_due}")
+            else:
+                st.error("Failed to update fee. Check student ID.")
