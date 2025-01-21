@@ -1,5 +1,7 @@
 import smtplib
 from email.mime.text import MIMEText
+from models import Student, Session
+from datetime import datetime
 
 def update_fee_status(session, student_id, amount_paid):
     student = session.query(Student).get(student_id)
