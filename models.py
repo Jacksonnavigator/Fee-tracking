@@ -15,7 +15,6 @@ class Student(Base):
     is_paid = Column(Boolean, default=False)
 
 # Setup database
-# Note: Change this to PostgreSQL or MySQL for production
 engine = create_engine('sqlite:///students.db')
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
