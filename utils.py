@@ -25,13 +25,13 @@ def get_student(session, student_id):
 def send_notification(student_email, message):
     msg = MIMEText(message)
     msg['Subject'] = "Fee Notification"
-    msg['From'] = "your-email@example.com"
+    msg['From'] = "jacksonnavigator7@gmail.com"
     msg['To'] = student_email
 
     try:
         with smtplib.SMTP('smtp.gmail.com', 587) as server:
             server.starttls()
-            server.login("your-email@example.com", "your-password")  # Use env variables in production
+            server.login("jacksonnavigator7@gmail.com", "123456.Ja")  # Use env variables in production
             server.send_message(msg)
         print("Successfully sent email")
     except Exception as e:
