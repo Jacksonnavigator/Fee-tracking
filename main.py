@@ -1,11 +1,22 @@
 import streamlit as st
 from models import Student, Session, engine
-from utils import update_fee_status, get_student, send_notification
+from utils import update_fee_status, get_student, send_notification, import_students_from_excel
 
 Session.configure(bind=engine)
 
 st.title("Student Fee Tracking System")
 
+# Upload Excel file
+uploaded_file = st.file_uploader("Choose an Excel file with student data", type="xlsx")
+
+if uploaded_file:
+    with Session() as session:
+        if import_students_from_excel(session, uploaded_file):
+            st.success("Students data has been imported successfully.")
+        else:
+            st.error("Failed to import student data.")
+
+# Update fee form
 with st.form("student_fee"):
     student_id = st.number_input("Student ID", min_value=1, step=1)
     amount_paid = st.number_input("Amount Paid", min_value=0.0, step=0.01)
