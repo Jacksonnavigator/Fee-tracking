@@ -12,9 +12,9 @@ uploaded_file = st.file_uploader("Choose an Excel file with student data", type=
 if uploaded_file:
     with Session() as session:
         if import_students_from_excel(session, uploaded_file):
-            st.success("Students data has been imported successfully.")
+            st.write("Students data has been imported/updated successfully.")
         else:
-            st.error("Failed to import student data.")
+            st.error("Failed to import or update student data. Check for duplicate emails or data issues.")
 
 # Update fee form
 with st.form("student_fee"):
